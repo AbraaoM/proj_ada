@@ -85,5 +85,5 @@ export async function index(
 }
 
 export const homeRoutes = {
-  "/": { GET: index },
+  "/o-que-vestir": { GET: index },
 } as const;

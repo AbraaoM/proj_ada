@@ -40,15 +40,15 @@ export async function create(request: Request): Promise<Response> {
       location: defaultLocation.label,
     });
 
-    if (html) return redirect(request, "/");
+    if (html) return redirect(request, "/o-que-vestir");
     return Response.json(toClothingCheckDto(row), { status: 201 });
   } catch (error) {
     if (error instanceof WeatherError) {
-      if (html) return redirect(request, "/?error=weather");
+      if (html) return redirect(request, "/o-que-vestir?error=weather");
       return Response.json({ error: error.message }, { status: 502 });
     }
     if (error instanceof HistoryError) {
-      if (html) return redirect(request, "/?error=history");
+      if (html) return redirect(request, "/o-que-vestir?error=history");
       return Response.json({ error: error.message }, { status: 503 });
     }
     throw error;

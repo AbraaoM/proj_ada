@@ -66,7 +66,13 @@ export function HomeView({ model }: { model: HomeViewModel }) {
     <main className="mx-auto min-h-dvh w-full max-w-5xl bg-white px-5 py-8 text-black transition-colors duration-300 md:border-x md:border-[#e5e7eb] md:px-12 md:py-14 lg:px-16 lg:py-16 dark:bg-black dark:text-white dark:md:border-gray-800">
       <header className="flex items-center justify-between gap-4">
         <div>
-          <h1 className="text-balance font-display text-3xl uppercase leading-none md:text-4xl">
+          <Link
+            href="/"
+            className="text-sm text-[#6b7280] transition-colors duration-300 hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8b5cf6] dark:text-[#9ca3af] dark:hover:text-white"
+          >
+            Ada
+          </Link>
+          <h1 className="mt-2 text-balance font-display text-3xl uppercase leading-none md:text-4xl">
             O que vestir
           </h1>
           <p className="mt-2 text-base text-[#6b7280] dark:text-[#9ca3af]">{model.location}</p>
@@ -78,7 +84,7 @@ export function HomeView({ model }: { model: HomeViewModel }) {
             </button>
           </form>
         ) : (
-          <Link href="/" className={actionClass}>
+          <Link href="/o-que-vestir" className={actionClass}>
             Tentar de novo
           </Link>
         )}

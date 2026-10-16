@@ -16,8 +16,11 @@ const anton = Anton({
 });
 
 export const metadata: Metadata = {
-  title: "O que vestir",
-  description: "Clima agora em Pindamonhangaba e a roupa para a criança.",
+  title: {
+    default: "Ada",
+    template: "%s · Ada",
+  },
+  description: "Para o dia a dia com ela.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

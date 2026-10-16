@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test("mostra temperatura, roupa e motivo", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/o-que-vestir");
 
   await expect(page.getByRole("heading", { name: "O que vestir" })).toBeVisible();
   const now = page.getByRole("region", { name: "Agora" });
@@ -16,7 +16,7 @@ test("mostra temperatura, roupa e motivo", async ({ page }) => {
 
 test("cabe na largura do celular", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/");
+  await page.goto("/o-que-vestir");
   await expect(page.getByRole("heading", { name: "O que vestir" })).toBeVisible();
 
   const overflows = await page.evaluate(
@@ -68,12 +68,12 @@ test("POST grava e o histórico da página mostra a linha", async ({ page, reque
   expect(body.recommendation).toContain("body de manga + calça");
   expect(body.recommendation).toContain("22°C");
 
-  await page.goto("/");
+  await page.goto("/o-que-vestir");
   const history = page.getByRole("region", { name: "Histórico" });
   await expect(history.getByText(/body de manga \+ calça/).first()).toBeVisible();
 
   const before = await history.getByRole("listitem").count();
   await page.getByRole("button", { name: "Atualizar" }).click();
-  await expect(page).toHaveURL(/:3000\/?$/);
+  await expect(page).toHaveURL(/\/o-que-vestir\/?$/);
   await expect(history.getByRole("listitem")).toHaveCount(before + 1);
 });
