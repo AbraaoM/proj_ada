@@ -57,17 +57,19 @@ function outfitLine(recommendation: string): string {
 }
 
 const actionClass =
-  "inline-flex shrink-0 items-center rounded bg-accent px-3 py-2 text-base font-medium text-foreground hover:bg-[#A1CFF0] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
+  "inline-flex shrink-0 items-center rounded bg-accent px-3 py-2 text-base font-medium text-white transition-colors duration-300 hover:bg-accent-bright focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-bright";
 
 export function HomeView({ model }: { model: HomeViewModel }) {
   const recommendation = model.recommendation;
 
   return (
-    <main className="mx-auto min-h-dvh w-full max-w-5xl bg-sheet px-5 py-8 md:border-x md:border-line md:px-12 md:py-14 lg:px-16 lg:py-16">
+    <main className="mx-auto min-h-dvh w-full max-w-5xl bg-white px-5 py-8 text-black transition-colors duration-300 md:border-x md:border-[#e5e7eb] md:px-12 md:py-14 lg:px-16 lg:py-16 dark:bg-black dark:text-white dark:md:border-gray-800">
       <header className="flex items-center justify-between gap-4">
         <div>
-          <h1 className="text-balance text-2xl font-semibold md:text-3xl">O que vestir</h1>
-          <p className="mt-1 text-base text-muted">{model.location}</p>
+          <h1 className="text-balance font-display text-3xl uppercase leading-none md:text-4xl">
+            O que vestir
+          </h1>
+          <p className="mt-2 text-base text-[#6b7280] dark:text-[#9ca3af]">{model.location}</p>
         </div>
         {recommendation ? (
           <form action="/api/clothing-checks" method="post">
@@ -90,12 +92,12 @@ export function HomeView({ model }: { model: HomeViewModel }) {
 
       {recommendation ? (
         <section className="mt-12 md:mt-16" aria-label="Agora">
-          <p className="max-w-3xl text-balance text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
+          <p className="max-w-3xl text-balance font-display text-4xl uppercase leading-none sm:text-5xl lg:text-6xl">
             {recommendation.outfit}
           </p>
 
-          <ul className="mt-8 flex flex-wrap items-baseline gap-x-8 gap-y-2 text-base text-muted md:mt-10 md:gap-x-10 md:text-lg">
-            <li className="text-4xl font-semibold text-foreground tabular-nums">
+          <ul className="mt-8 flex flex-wrap items-baseline gap-x-8 gap-y-2 text-base text-[#6b7280] md:mt-10 md:gap-x-10 md:text-lg dark:text-[#9ca3af]">
+            <li className="text-4xl font-semibold text-black tabular-nums dark:text-white">
               {formatMeasure(recommendation.temperatureC)}°
             </li>
             {recommendation.apparentTemperatureC !== null ? (
@@ -112,28 +114,30 @@ export function HomeView({ model }: { model: HomeViewModel }) {
       ) : null}
 
       <section className="mt-16 md:mt-24" aria-labelledby="historico-titulo">
-        <h2 id="historico-titulo" className="text-xl font-semibold md:text-2xl">
+        <h2 id="historico-titulo" className="font-display text-2xl uppercase leading-none md:text-3xl">
           Histórico
         </h2>
         {model.historyMessage ? (
-          <p className="mt-4 max-w-[65ch] text-pretty text-base text-muted" role="alert">
+          <p className="mt-4 max-w-[65ch] text-pretty text-base text-[#6b7280] dark:text-[#9ca3af]" role="alert">
             {model.historyMessage}
           </p>
         ) : null}
         {model.history.length === 0 && !model.historyMessage ? (
-          <p className="mt-4 text-base text-muted">Ainda não há consultas salvas.</p>
+          <p className="mt-4 text-base text-[#6b7280] dark:text-[#9ca3af]">
+            Ainda não há consultas salvas.
+          </p>
         ) : null}
         {model.history.length > 0 ? (
           <ol className="mt-4">
             {model.history.map((item) => (
               <li
                 key={item.id}
-                className="-mx-2 grid grid-cols-[6.5rem_4rem_minmax(0,1fr)] items-baseline gap-x-3 border-t border-line px-2 py-3 text-base hover:bg-[#E5E5E4] md:grid-cols-[7rem_5rem_minmax(0,1fr)] md:gap-x-8 md:py-4"
+                className="-mx-2 grid grid-cols-[6.5rem_4rem_minmax(0,1fr)] items-baseline gap-x-3 border-t border-[#e5e7eb] px-2 py-3 text-base transition-colors duration-300 hover:bg-[#fafafa] md:grid-cols-[7rem_5rem_minmax(0,1fr)] md:gap-x-8 md:py-4 dark:border-gray-800 dark:hover:bg-[#0a0a0a]"
               >
-                <span className="tabular-nums text-muted">
+                <span className="tabular-nums text-[#6b7280] dark:text-[#9ca3af]">
                   {formatCheckedAt(item.checkedAt, model.nowIso)}
                 </span>
-                <span className="tabular-nums text-muted">
+                <span className="tabular-nums text-[#6b7280] dark:text-[#9ca3af]">
                   {formatMeasure(item.temperatureC)}°
                 </span>
                 <span className="min-w-0 text-pretty">{outfitLine(item.recommendation)}</span>

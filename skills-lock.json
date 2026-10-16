@@ -1,23 +1,11 @@
 {
   "version": 1,
   "skills": {
-    "docs-diagrams": {
-      "source": "vercel/next.js",
-      "sourceType": "github",
-      "skillPath": ".agents/skills/docs-diagrams/SKILL.md",
-      "computedHash": "75890e80436ba9fd0d8843497abf44ff4388921888ec52af20ddb186513d9870"
-    },
     "frontend-design": {
       "source": "anthropics/skills",
       "sourceType": "github",
       "skillPath": "skills/frontend-design/SKILL.md",
       "computedHash": "89496d5dd00f4810205f351759594fc2742bf8eea85a2f2b2d1de59f4bd91576"
-    },
-    "migrate-radix-to-base": {
-      "source": "shadcn/ui",
-      "sourceType": "github",
-      "skillPath": "skills/migrate-radix-to-base/SKILL.md",
-      "computedHash": "e1f2030ee5059be3dff0812ca0e4b995ee9fa3132176f049ebe6c90346a6755e"
     },
     "neon": {
       "source": "neondatabase/agent-skills",
@@ -66,12 +54,6 @@
       "sourceType": "github",
       "skillPath": "skills/neon-postgres-egress-optimizer/SKILL.md",
       "computedHash": "9f991d785e63e9ae33e1a09db18ab8d559083861c70aebc6a740df01ca5bf214"
-    },
-    "next-bundle-optimizer": {
-      "source": "vercel/next.js",
-      "sourceType": "github",
-      "skillPath": "skills/next-bundle-optimizer/SKILL.md",
-      "computedHash": "c6b7c0bcc589582d7c142c20febe4a0501b8e65e2d239abef86b4c59b680b039"
     },
     "next-cache-components-adoption": {
       "source": "vercel/next.js",
