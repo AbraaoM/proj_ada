@@ -1,50 +1,61 @@
-# AGENTS.md — Sistema de Cuidado da Filha
+# Daughter Care System — instructions for agents
 
-## Identidade do projeto
-App pessoal para ajudar a cuidar da minha filha.
-Foco em simplicidade, clareza, beleza e uso diário no celular.
+Personal app to help take care of my daughter.  
+Focus on simplicity, clarity, beauty, and daily use on the phone.
 
-## Stack obrigatória
+## Start every session here
+1. Read this `AGENTS.md` completely.
+2. Confirm active skills and MCPs (`grok inspect` and `grok mcp list`).
+3. For non-trivial features, always start in Plan Mode (`/plan`) and wait for approval before editing files.
+
+## Required stack
 - Next.js (App Router) + TypeScript + Tailwind CSS
-- Banco: Neon (Postgres serverless)
-- Driver: `@neondatabase/serverless`
-- Deploy alvo: Vercel
+- Database: Neon (Postgres serverless) with `@neondatabase/serverless`
+- Target deploy: Vercel
+- Weather forecast: Open-Meteo (no API key)
 
-## Localização padrão
-- Cidade: Pindamonhangaba, SP, Brasil
-- Coordenadas: latitude -22.9239, longitude -45.4617
-- Permitir trocar a cidade depois
+## Default location
+- City: Pindamonhangaba, SP, Brazil
+- Coordinates: latitude -22.9239, longitude -45.4617
+- Allow changing the city later
 
-## Design
-- Estilo visual inspirado no Notion: limpo, respirado, tipografia forte e hierarquia clara.
-- Paleta: preto, branco e tons de cinza. Apenas **uma** cor de destaque.
-- Evitar gradientes, sombras pesadas, excesso de cores e elementos decorativos desnecessários.
-- Preferir fonte Inter (ou similar) e grid de 4px.
-- UI **mobile-first** e totalmente responsiva (celular, tablet e desktop).
-- Priorizar beleza e polimento visual: espaçamento generoso, alinhamento preciso, hierarquia tipográfica clara e microinterações sutis.
-- Componentes devem parecer cuidados e intencionais, não genéricos.
+## Design (non-negotiable — Brand Identity)
+Follow the visual identity defined at https://brand-identity.abraaomoreira.dev/
 
-## Regras de trabalho
-- Sempre comece features não-triviais em Plan Mode (`/plan`) e espere aprovação antes de editar arquivos.
-- Use as skills do Neon e o Neon MCP para criar projetos, branches, tabelas e rodar SQL.
-- Use as skills de design (notion-ui / frontend-design) para manter consistência visual e beleza.
-- Nunca invente connection strings. Sempre obtenha via MCP ou peça o usuário.
-- Prefira Server Components quando possível.
-- Não adicione dependências sem necessidade clara.
-- Nunca commite arquivos `.env*` ou segredos.
-- Preferir diffs pequenos e revisáveis.
-- Testar responsividade em diferentes tamanhos de tela durante o desenvolvimento.
+- **Minimalism**: prioritize black and white. Use color only when necessary to highlight.
+- **Primary palette** (fixed):
+  - Pure Black `#000000`
+  - Pure White `#ffffff`
+  - Soft Black `#0a0a0a`
+  - Soft White `#fafafa`
+- **Accent color** (agent’s choice):
+  - When creating the interface, choose **one** primary accent color (and light/dark variations if needed).
+  - Follow the logic of the identity examples (purple and yellow): vibrant color, high contrast, moderate use.
+  - Reference examples (not mandatory): `#8b5cf6`, `#fbbf24`.
+  - **Justify the choice**: briefly explain why the color makes sense for the app. The justification must appear in the plan or in the first UI commit.
+  - Once chosen and justified, keep consistency across buttons, links, highlights, and interactive states.
+- **Neutrals**:
+  - Text Gray `#6b7280`
+  - Light Gray `#9ca3af`
+  - Border Gray `#e5e7eb`
+- **Typography**:
+  - Anton for titles and highlights
+  - Inter for body text
+- **Themes**: support light and dark mode with good readability in both.
+- **Mobile-first**: design and implement for mobile first. The main experience must be excellent on mobile.
+- **Responsiveness**: work very well on larger screens (tablet and desktop), using the space intelligently without losing clarity.
+- Use Tailwind. Examples: `bg-white dark:bg-black`, `text-black dark:text-white`, `border-gray-200 dark:border-gray-800`, `transition-colors duration-300`.
+- Prioritize polish: generous spacing, precise alignment, clear typographic hierarchy, and subtle microinteractions.
+- Components must be intentional and consistent with the identity.
+- Test on mobile and on at least one desktop breakpoint.
 
-## Testes
-- Aplique TDD quando fizer sentido (escrever o teste antes da implementação).
-- Use Vitest para testes unitários e de integração.
-- Use Playwright para testes E2E dos fluxos principais (incluindo verificação visual básica).
-- Rode os testes relevantes antes de considerar uma feature pronta.
-- Mantenha cobertura razoável nas partes críticas (lógica de negócio e fluxos principais).
+## Never break the core experience
+The person will use this daily. A broken screen or wrong recommendation creates distrust.
+- Prefer Server Components when possible.
+- Handle weather and database errors clearly (never leave a blank screen or raw error).
+- Test the clothing recommendation logic (TDD when it makes sense).
+- Never invent connection strings — obtain them via Neon MCP or ask the user.
+- Never commit `.env*` or secrets.
 
-## O que evitar
-- Complexidade desnecessária na primeira versão
-- Autenticação (por enquanto)
-- Estilos elaborados ou fora da paleta definida
-- Layouts que quebrem em celular
-- Dependências extras sem justificativa clara
+## Architecture
+Keep separation of responsibilities. Business logic must not be mixed with the UI.
